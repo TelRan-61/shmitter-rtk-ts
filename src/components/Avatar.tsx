@@ -1,7 +1,11 @@
 import {changeAvatar, changeName} from "../features/user/userSlice.ts";
 import {useAppDispatch, useAppSelector} from "../app/hooks.ts";
 
-const Avatar = ({size}) => {
+interface Props {
+    size?: 'small'
+}
+
+const Avatar = ({size}: Props) => {
     const {avatar, name} = useAppSelector(state => state.user);
     const dispatch = useAppDispatch();
 

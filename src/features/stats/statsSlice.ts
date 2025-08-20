@@ -1,4 +1,10 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, type PayloadAction} from "@reduxjs/toolkit";
+import type {Stats} from "../../utils/types";
+
+interface StatsPayload {
+    statsType: keyof Stats,
+    sum: number
+}
 
 const statsSlice = createSlice({
     name: 'stats',
@@ -8,11 +14,11 @@ const statsSlice = createSlice({
     },
     reducers: {
         changeStats: {
-            reducer: (state, action) => {
+            reducer: (state, action: PayloadAction<StatsPayload>) => {
                 const res = state[action.payload.statsType] + action.payload.sum;
                 state[action.payload.statsType] = res >= 0 ? res : 0;
             },
-            prepare: (statsType, sum) => ({payload: {statsType, sum}})
+            prepare: (statsType: keyof Stats, sum: number) => ({payload: {statsType, sum}})
         }
     }
 })
