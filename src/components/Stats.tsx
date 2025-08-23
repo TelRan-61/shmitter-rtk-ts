@@ -2,6 +2,7 @@ import Avatar from "./Avatar.tsx";
 import {useDispatch} from "react-redux";
 import {changeStats} from "../features/stats/statsSlice.ts";
 import {useAppSelector} from "../app/hooks.ts";
+import {StatsType} from "../utils/types.d";
 
 const Stats = () => {
     const {followers, following} = useAppSelector(state => state.stats);
@@ -16,17 +17,17 @@ const Stats = () => {
             </div>
             <div className={'stats'}>
                 <div
-                    onClick={() => dispatch(changeStats('followers', 1))}
+                    onClick={() => dispatch(changeStats(StatsType.FOLLOWERS, 1))}
                     onContextMenu={(e) => {
                         e.preventDefault();
-                        dispatch(changeStats('followers', -1));
+                        dispatch(changeStats(StatsType.FOLLOWERS, -1));
                     }}
                 >Followers: {followers}</div>
                 <div
-                    onClick={() => dispatch(changeStats('following', 1))}
+                    onClick={() => dispatch(changeStats(StatsType.FOLLOWING, 1))}
                     onContextMenu={(e) => {
                         e.preventDefault();
-                        dispatch(changeStats('following', -1));
+                        dispatch(changeStats(StatsType.FOLLOWING, -1));
                     }}
                 >Following: {following}</div>
             </div>
