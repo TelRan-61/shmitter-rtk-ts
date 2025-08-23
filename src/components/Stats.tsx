@@ -2,9 +2,10 @@ import Avatar from "./Avatar.tsx";
 import {useDispatch} from "react-redux";
 import {changeStats} from "../features/stats/statsSlice.ts";
 import {useAppSelector} from "../app/hooks.ts";
+import {followers, following} from "../utils/constants.ts";
 
 const Stats = () => {
-    const {followers, following} = useAppSelector(state => state.stats);
+    const stats = useAppSelector(state => state.stats);
     const {name} = useAppSelector(state => state.user);
     const dispatch = useDispatch();
 
@@ -16,19 +17,19 @@ const Stats = () => {
             </div>
             <div className={'stats'}>
                 <div
-                    onClick={() => dispatch(changeStats('followers', 1))}
+                    onClick={() => dispatch(changeStats(followers, 1))}
                     onContextMenu={(e) => {
                         e.preventDefault();
-                        dispatch(changeStats('followers', -1));
+                        dispatch(changeStats(followers, -1));
                     }}
-                >Followers: {followers}</div>
+                >Followers: {stats[followers]}</div>
                 <div
-                    onClick={() => dispatch(changeStats('following', 1))}
+                    onClick={() => dispatch(changeStats(following, 1))}
                     onContextMenu={(e) => {
                         e.preventDefault();
-                        dispatch(changeStats('following', -1));
+                        dispatch(changeStats(following, -1));
                     }}
-                >Following: {following}</div>
+                >Following: {stats[following]}</div>
             </div>
         </div>
     );
